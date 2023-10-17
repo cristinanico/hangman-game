@@ -1,7 +1,15 @@
 import { useState, useEffect } from 'react';
 // import viteLogo from '/vite.svg'
 import callToApi from '../services/api'; // Importamos el servicio que acabamos de crear
+import Header from './Header/Header';
+import Dummy from './DummyError/Dummy';
+import Solution from './SolutionLetters/Solution';
 import '../styles/App.scss';
+import '../styles/Reset.scss';
+import '../styles/components/Form.scss';
+import '../styles/components/Footer.scss';
+import '../styles/components/Loading.scss';
+import '../styles/components/Instructions.scss';
 
 function App() {
   let [numberOfErrors, setNumberOfErrors] = useState(0);
@@ -20,7 +28,7 @@ function App() {
 
   const renderSolutionLetters = () => {
     const wordLetters = word.split('');
-    console.log(wordLetters);
+    // console.log(wordLetters);
 
     return wordLetters // todas las letras buscadas por el user
       .map((letter, index) => {
@@ -57,7 +65,7 @@ function App() {
   }; */
 
   const handleInput = (ev) => {
-    console.log(ev.target.value);
+    // console.log(ev.target.value);
     const letterValue = ev.target.value.toLowerCase();
     const regex = /[a-zA-ZáéíóúüÁÉÍÓÚÜñÑ]/;
 
@@ -87,37 +95,24 @@ function App() {
   return (
     <>
       <div className="page">
-        <header>
-          <h1 className="header__title">Juego del ahorcado</h1>
-        </header>
+        <Header title='Juego del ahorcado' classCss='header__title' />
+        
         <main className="main">
           <section>
-            <div className="solution">
+            <Solution classCss='solution' title='Solución: ' render={renderSolutionLetters()} />
+            {/* <div className="solution">
               <h2 className="title">Solución: </h2>
 
               <ul className="letters">
                 {renderSolutionLetters()}
-                {/*      <li className="letter">k</li>
-                <li className="letter">a</li>
-                <li className="letter"></li>
-                <li className="letter">a</li>
-                <li className="letter">k</li>
-                <li className="letter">r</li>
-                <li className="letter"></li>
-                <li className="letter">k</li>
-                <li className="letter">e</li>
-                <li className="letter">r</li> */}
+                
               </ul>
-            </div>
+            </div> */}
             <div className="error">
               <h2 className="title">Letras falladas:</h2>
               <ul className="letters">
                 {renderErrorLetters()}
-                {/* <li className="letter">f</li>
-                <li className="letter">q</li>
-                <li className="letter">h</li>
-                <li className="letter">p</li>
-                <li className="letter">x</li> */}
+                
               </ul>
             </div>
             <form className="form" onSubmit={handleSubmit}>
@@ -136,10 +131,10 @@ function App() {
               />
             </form>
           </section>
-          {/*         <button onClick={handleClick} className="btn-visible">
-            Incrementar
-          </button> */}
-          <section className={`dummy error-${numberOfErrors}`}>
+          
+           <Dummy classCss={`dummy error-${numberOfErrors}`}/>
+          
+          {/* <section className={`dummy error-${numberOfErrors}`}>
             <span className="error-13 eye"></span>
             <span className="error-12 eye"></span>
             <span className="error-11 line"></span>
@@ -153,7 +148,7 @@ function App() {
             <span className="error-3 line"></span>
             <span className="error-2 line"></span>
             <span className="error-1 line"></span>
-          </section>
+          </section> */}
         </main>
       </div>
     </>
