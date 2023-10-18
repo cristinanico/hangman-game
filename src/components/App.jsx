@@ -4,6 +4,7 @@ import callToApi from '../services/api'; // Importamos el servicio que acabamos 
 import Header from './Header/Header';
 import Dummy from './DummyError/Dummy';
 import Solution from './SolutionLetters/Solution';
+import Form from './Form/Form';
 import '../styles/App.scss';
 import '../styles/Reset.scss';
 import '../styles/components/Form.scss';
@@ -95,11 +96,15 @@ function App() {
   return (
     <>
       <div className="page">
-        <Header title='Juego del ahorcado' classCss='header__title' />
-        
+        <Header title="Juego del ahorcado" classCss="header__title" />
+
         <main className="main">
           <section>
-            <Solution classCss='solution' title='Solución: ' render={renderSolutionLetters()} />
+            <Solution
+              classCss="solution"
+              title="Solución: "
+              render={renderSolutionLetters()}
+            />
             {/* <div className="solution">
               <h2 className="title">Solución: </h2>
 
@@ -110,12 +115,11 @@ function App() {
             </div> */}
             <div className="error">
               <h2 className="title">Letras falladas:</h2>
-              <ul className="letters">
-                {renderErrorLetters()}
-                
-              </ul>
+              <ul className="letters">{renderErrorLetters()}</ul>
             </div>
-            <form className="form" onSubmit={handleSubmit}>
+
+            <Form onChange = {handleInput} value = {lastLetter} onSubmit = {handleSubmit}/>
+            {/* <form className="form" onSubmit={handleSubmit}>
               <label className="title" htmlFor="last-letter">
                 Escribe una letra:
               </label>
@@ -129,11 +133,11 @@ function App() {
                 onChange={handleInput}
                 value={lastLetter}
               />
-            </form>
+            </form> */}
           </section>
-          
-           <Dummy classCss={`dummy error-${numberOfErrors}`}/>
-          
+
+          <Dummy classCss={`dummy error-${numberOfErrors}`} />
+
           {/* <section className={`dummy error-${numberOfErrors}`}>
             <span className="error-13 eye"></span>
             <span className="error-12 eye"></span>
