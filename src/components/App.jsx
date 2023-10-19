@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 // import viteLogo from '/vite.svg'
 import callToApi from '../services/api'; // Importamos el servicio que acabamos de crear
 /* carpetas */
+import Loading from './Loading/Loading';
 import Instructions from './Instructions';
 import Options from './Options';
 import Header from './Header/Header';
@@ -14,7 +15,6 @@ import '../styles/App.scss';
 import '../styles/Reset.scss';
 import '../styles/components/Form.scss';
 import '../styles/components/Footer.scss';
-import '../styles/components/Loading.scss';
 import '../styles/components/Instructions.scss';
 /* react-router-dom */
 import { Route, Routes} from 'react-router-dom';
@@ -24,15 +24,27 @@ function App() {
   const [word, setWord] = useState('');
   const [lastLetter, setLastLetter] = useState('');
   const [userLetters, setuserLetters] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     // Dentro de useEffect llamamos a la API
     callToApi().then((response) => {
       // Cuando la API responde guardamos los datos en el estado para que se vuelva a renderizar el componente
       setWord(response.word);
+      setIsLoading(true)
     });
     // Aquí ponemos un array vacío porque solo queremos que se llame a la API la primera vez
   }, []);
+
+  const handleChangeInput = (input) => {
+    setWord(input)
+
+    if(userLetters !== ''){
+      console.log('patata');
+      setLastLetter('');
+      setuserLetters([]);
+    }
+  };
 
   const renderSolutionLetters = () => {
     const wordLetters = word.split('');
@@ -104,6 +116,7 @@ function App() {
     <>
       <div className="page">
         <Header title="Juego del ahorcado" classCss="header__title" />
+        <Loading loading={isLoading} />
          <main className="main">
           <Routes>
             {/* main */}
@@ -135,7 +148,7 @@ function App() {
             </Route>
             <Route 
               path="/options"
-              element={<Options/>}>
+              element={<Options handleChangeInput={handleChangeInput} />}>
             </Route>
           </Routes>
           <Dummy classCss={`dummy error-${numberOfErrors}`} />
