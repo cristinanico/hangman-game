@@ -1,16 +1,23 @@
 import { useState, useEffect } from 'react';
 // import viteLogo from '/vite.svg'
 import callToApi from '../services/api'; // Importamos el servicio que acabamos de crear
+/* carpetas */
+import Instructions from './Instructions';
+import Options from './Options';
 import Header from './Header/Header';
+import Footer from './Footer/Footer';
 import Dummy from './DummyError/Dummy';
 import Solution from './SolutionLetters/Solution';
 import Form from './Form/Form';
+/* css */
 import '../styles/App.scss';
 import '../styles/Reset.scss';
 import '../styles/components/Form.scss';
 import '../styles/components/Footer.scss';
 import '../styles/components/Loading.scss';
 import '../styles/components/Instructions.scss';
+/* react-router-dom */
+import { Route, Routes} from 'react-router-dom';
 
 function App() {
   let [numberOfErrors, setNumberOfErrors] = useState(0);
@@ -97,63 +104,42 @@ function App() {
     <>
       <div className="page">
         <Header title="Juego del ahorcado" classCss="header__title" />
+        <Routes>
+        {/* main */}
+          <Route 
+              path="/"
+              element={
+                <>
+                  <main className="main">
+                    <section>
+                      <Solution
+                        classCss="solution"
+                        title="Solución: "
+                        render={renderSolutionLetters()}
+                      />
+                      <div className="error">
+                        <h2 className="title">Letras falladas:</h2>
+                        <ul className="letters">{renderErrorLetters()}</ul>
+                      </div>
 
-        <main className="main">
-          <section>
-            <Solution
-              classCss="solution"
-              title="Solución: "
-              render={renderSolutionLetters()}
-            />
-            {/* <div className="solution">
-              <h2 className="title">Solución: </h2>
+                      <Form onChange = {handleInput} value = {lastLetter} onSubmit = {handleSubmit}/>
+                    </section>
 
-              <ul className="letters">
-                {renderSolutionLetters()}
-                
-              </ul>
-            </div> */}
-            <div className="error">
-              <h2 className="title">Letras falladas:</h2>
-              <ul className="letters">{renderErrorLetters()}</ul>
-            </div>
-
-            <Form onChange = {handleInput} value = {lastLetter} onSubmit = {handleSubmit}/>
-            {/* <form className="form" onSubmit={handleSubmit}>
-              <label className="title" htmlFor="last-letter">
-                Escribe una letra:
-              </label>
-              <input
-                autoComplete="off"
-                className="form__input"
-                maxLength="1"
-                type="text"
-                name="last-letter"
-                id="last-letter"
-                onChange={handleInput}
-                value={lastLetter}
-              />
-            </form> */}
-          </section>
-
-          <Dummy classCss={`dummy error-${numberOfErrors}`} />
-
-          {/* <section className={`dummy error-${numberOfErrors}`}>
-            <span className="error-13 eye"></span>
-            <span className="error-12 eye"></span>
-            <span className="error-11 line"></span>
-            <span className="error-10 line"></span>
-            <span className="error-9 line"></span>
-            <span className="error-8 line"></span>
-            <span className="error-7 line"></span>
-            <span className="error-6 head"></span>
-            <span className="error-5 line"></span>
-            <span className="error-4 line"></span>
-            <span className="error-3 line"></span>
-            <span className="error-2 line"></span>
-            <span className="error-1 line"></span>
-          </section> */}
-        </main>
+                    <Dummy classCss={`dummy error-${numberOfErrors}`} />
+                  </main>
+                </>
+              }>
+          </Route>
+          <Route 
+            path="/instructions"
+            element={<Instructions/>}>
+          </Route>
+          <Route 
+            path="/options"
+            element={<Options/>}>
+          </Route>
+        </Routes>
+        <Footer/>
       </div>
     </>
   );
