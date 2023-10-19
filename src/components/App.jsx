@@ -104,41 +104,42 @@ function App() {
     <>
       <div className="page">
         <Header title="Juego del ahorcado" classCss="header__title" />
-        <Routes>
-        {/* main */}
-          <Route 
-              path="/"
-              element={
-                <>
-                  <main className="main">
-                    <section>
-                      <Solution
-                        classCss="solution"
-                        title="Solución: "
-                        render={renderSolutionLetters()}
-                      />
-                      <div className="error">
-                        <h2 className="title">Letras falladas:</h2>
-                        <ul className="letters">{renderErrorLetters()}</ul>
-                      </div>
+         <main className="main">
+          <Routes>
+            {/* main */}
+            <Route 
+                path="/"
+                element={
+                  <>
+                      <section>
+                        <Solution
+                          classCss="solution"
+                          title="Solución: "
+                          render={renderSolutionLetters()}
+                        />
+                        <div className="error">
+                          <h2 className="title">Letras falladas:</h2>
+                          <ul className="letters">{renderErrorLetters()}</ul>
+                        </div>
 
-                      <Form onChange = {handleInput} value = {lastLetter} onSubmit = {handleSubmit}/>
-                    </section>
+                        <Form onChange = {handleInput} value = {lastLetter} onSubmit = {handleSubmit}/>
+                      </section>
 
-                    <Dummy classCss={`dummy error-${numberOfErrors}`} />
-                  </main>
-                </>
-              }>
-          </Route>
-          <Route 
-            path="/instructions"
-            element={<Instructions/>}>
-          </Route>
-          <Route 
-            path="/options"
-            element={<Options/>}>
-          </Route>
-        </Routes>
+                      
+                  </>
+                }>
+            </Route>
+            <Route 
+              path="/instructions"
+              element={<Instructions/>}>
+            </Route>
+            <Route 
+              path="/options"
+              element={<Options/>}>
+            </Route>
+          </Routes>
+          <Dummy classCss={`dummy error-${numberOfErrors}`} />
+        </main>
         <Footer/>
       </div>
     </>
