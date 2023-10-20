@@ -31,7 +31,7 @@ function App() {
     callToApi().then((response) => {
       // Cuando la API responde guardamos los datos en el estado para que se vuelva a renderizar el componente
       setWord(response.word);
-      setIsLoading(true)
+      setIsLoading(false)
     });
     // Aquí ponemos un array vacío porque solo queremos que se llame a la API la primera vez
   }, []);
@@ -116,7 +116,7 @@ function App() {
     <>
       <div className="page">
         <Header title="Juego del ahorcado" classCss="header__title" />
-        <Loading loading={isLoading} />
+        <Loading isLoading={isLoading} />
          <main className="main">
           <Routes>
             {/* main */}

@@ -1,5 +1,6 @@
 import '../../styles/components/Loading.scss';
 
+// eslint-disable-next-line react/prop-types
 const Loading = ({isLoading}) => {
 
     //return <p>EH!!! EL LOADING!</p>
