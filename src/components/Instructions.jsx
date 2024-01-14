@@ -1,21 +1,21 @@
 import '../styles/components/Instructions.scss';
 
 const Instructions = () => {
-    return (
-        <section className="instructions">
-            <p>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Dignissimos
-                provident nisi voluptatem est nostrum optio perferendis doloremque,
-                delectus at, assumenda suscipit sit odio ipsum error consequatur numquam
-                vero impedit nulla?
-            </p>
-            <p>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Praesentium
-                animi voluptatem quis impedit amet in dicta soluta explicabo, fugit magni
-                mollitia, pariatur eos, repellendus aut esse recusandae minima eum eaque.
-            </p>
-        </section>
-    )
-}
+  return (
+    <section className="instructions">
+      <p>
+        ¿Serás más listo que tu ordenador? Intenta completar la palabra
+        escondida adivinando qué letras tiene pero ¡cuidado! Tendrás que
+        conseguirlo antes de que el dibujo complete sus líneas o habrás perdido
+        tu oportunidad.
+      </p>
+      <p>
+        Si la letra sugerida está en la palabra, se pintará en las líneas. Si
+        por el contrario, tu letra no forma parte de la palabra escondida, ¡se
+        irá dibujando el ahorcado!
+      </p>
+    </section>
+  );
+};
 
 export default Instructions;
